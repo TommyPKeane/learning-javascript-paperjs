@@ -17,7 +17,7 @@ Note that some of these examples I'm providing here will be self-contained (and 
 <a id="whats-this-tommy-teaches-tommy-thing-all-about"></a>
 ## What's this "tommy teaches tommy" thing all about?
 
-What's in a name? You can see a rambly explanation [here at my personal website](https://tommypkeane.com/about-tommy/tommy-teaches-tommy.html); but, in short: I'm just trying to say that I'm writing out what I think is helpful/interesting to me, and I'm sharing it in case it's helpful to anyone else, but please know that I'm trying to talk _down_ to anyone :smile: (except maybe myself).
+What's in a name? You can see a rambly explanation [here at my personal website](https://tommypkeane.com/about-tommy/tommy-teaches-tommy.html); but, in short: I'm just trying to say that I'm writing out what I think is helpful/interesting to me, and I'm sharing it in case it's helpful to anyone else, but please know that I'm ___not___ trying to talk _down_ to anyone :smile: (except maybe myself :ghost:).
 
 <a id="license"></a>
 ## License
