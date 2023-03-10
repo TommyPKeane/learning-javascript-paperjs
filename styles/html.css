@@ -1,0 +1,30 @@
+html {
+  text-align: center;
+}
+
+body {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.article-body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 18px;
+  font-family: sans-serif;
+}
+
+footer {
+  font-size: 10px;
+  text-align: center;
+}
+
+footer p {
+  margin: 5px;
+}

@@ -1,0 +1,7 @@
+@import "/styles/colors.css" layer(theme);
+@import "/styles/fonts.css" layer(theme);
+
+@import "/styles/html.css" layer(elements);
+@import "/styles/canvas.css" layer(elements);
+
+@layer theme, elements;
