@@ -1,0 +1,11 @@
+@import "/styles/common.css" layer(common);
+
+@layer specific {
+  .linkBlock {
+    padding: 0.25rem;
+    box-shadow: 2px 2px 5px rgba(20, 20, 50, 0.50);
+    min-width: 15rem;
+  };
+};
+
+@layer common, specific;
