@@ -17,7 +17,7 @@ document.addEventListener(
     const canvasCoords = setupPaperCanvas(mainPaperScope, mainCanvasId);
     mainPaperScope.activate();
 
-    const numRaindrops = 10;
+    const numRaindrops = 500;
     uiElements["raindrops"] = [];
 
     for (const i of [...Array(numRaindrops + 1).keys()]) {
@@ -52,7 +52,7 @@ document.addEventListener(
               "position.y": canvasCoords.height,
             },
             {
-              "duration": 2000 - (50 * Math.random()),
+              "duration": 2000 - (2000 * Math.random()),
               "easing": "easeInQuint",
               "start": true,
             },
