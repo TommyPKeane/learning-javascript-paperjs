@@ -12,6 +12,10 @@ const exampleLinks = [
     "link": "/examples/rain/interactive.html",
   },
   {
+    "title": "📐 Shapes",
+    "link": "/examples/shapes/interactive.html",
+  },
+  {
     "title": "🏹 Vectors",
     "link": "/examples/vectors/interactive.html",
   },
