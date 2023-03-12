@@ -1,6 +1,10 @@
 @import "/styles/common.css" layer(common);
 
 @layer specific {
+  canvas {
+    width: 80%;
+    height: 600px;
+  }
 };
 
 @layer common, specific;
