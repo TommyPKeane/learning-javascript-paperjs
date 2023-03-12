@@ -1,6 +1,18 @@
 @import "/styles/common.css" layer(common);
 
 @layer specific {
+  canvas {
+    width: 80%;
+    height: 600px;
+    border-radius: 15px;
+    box-shadow:
+      0px 0px 25px rgba(40, 10, 50, 0.40),
+      0px 0px 25px rgba(40, 10, 50, 0.40),
+      0px 10px 15px rgba(40, 10, 50, 0.40),
+      10px 0px 15px rgba(40, 10, 50, 0.40),
+      10px 10px 5px rgba(40, 10, 50, 0.40),
+      -10px -10px 5px rgba(40, 10, 50, 0.10);
+  }
 };
 
 @layer common, specific;
