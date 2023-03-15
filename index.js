@@ -4,6 +4,10 @@ const exampleLinks = [
     "link": "/examples/helicopter/interactive.html",
   },
   {
+    "title": "⌨️ Interactivity",
+    "link": "/examples/interactivity/interactive.html",
+  },
+  {
     "title": "🐸 Jump",
     "link": "/examples/jump/interactive.html",
   },
