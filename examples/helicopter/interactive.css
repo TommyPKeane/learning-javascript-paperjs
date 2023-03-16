@@ -1,0 +1,6 @@
+@import "/styles/common.css" layer(common);
+
+@layer specific {
+};
+
+@layer common, specific;
