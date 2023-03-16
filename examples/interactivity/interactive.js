@@ -5,13 +5,63 @@ paper.install(window);
 const mainCanvasId = "paper-canvas";
 const mainCanvasElement = document.getElementById(mainCanvasId);
 const mainPaperScope = new paper.PaperScope();
-const mainPaperTool = null;
+const mainPaperTool = new paper.Tool();
 const uiElements = {};
 
 const defaultKeyWidth = 50;
 const keyboardKeys = {};
+const defaultColor = "#B2BEB5";
+const selectedColor = "#CCCEC5";
+const supportedLetters = ["Q", "W", "E", "R", "T", "Y"];
+const KeyStates = {
+  "SELECTED": true,
+  "UNSELECTED": false,
+}
+const modifierKeys = {
+  "alt": {
+    "pressed": false,
+    "released": false,
+  },
+  "ctrl": {
+    "pressed": false,
+    "released": false,
+  },
+  "meta": {
+    "pressed": false,
+    "released": false,
+  },
+  "shift": {
+    "pressed": false,
+    "released": false,
+  },
+}
+let modifierKeyHeld = false;
+let supportedKeyHeld = false;
 
 const figCaptionElement = document.getElementById("paper-canvas-figcaption");
+
+
+const anyModifierPressed = function hstAnyModifierPressed() {
+  const pressed = (
+    modifierKeys.alt.pressed
+    || modifierKeys.ctrl.pressed
+    || modifierKeys.meta.pressed
+    || modifierKeys.shift.pressed
+  );
+  return pressed;
+}
+
+
+const anyModifierReleased = function hstAnyModifierReleased() {
+  const released = (
+    modifierKeys.alt.released
+    || modifierKeys.ctrl.released
+    || modifierKeys.meta.released
+    || modifierKeys.shift.released
+  );
+  return released;
+}
+
 
 let fps = 0;
 let eventFrameTick = 0;
@@ -26,15 +76,73 @@ function onFrame(event) {
   return;
 }
 
+mainPaperTool.onKeyDown = function(event) {
+  const keyLetter = event.key.toUpperCase();
+  modifierKeys.alt.pressed = event.event.altKey;
+  modifierKeys.ctrl.pressed = event.event.ctrlKey;
+  modifierKeys.meta.pressed = event.event.metaKey;
+  modifierKeys.shift.pressed = event.event.shiftKey;
+  if (anyModifierPressed()) {
+    modifierKeyHeld = (supportedKeyHeld ? false : true);  // Pressed
+  } else {}
+  let trickleUp = true;
+  if (supportedLetters.includes(keyLetter) && !modifierKeyHeld) {
+    supportedKeyHeld = true;
+    if (keyboardKeys[keyLetter].enabled) {
+      keyboardKeys[keyLetter].key.fillColor = selectedColor;
+      trickleUp = false;
+    } else {}
+  } else {}
+  return trickleUp;
+}
 
-const createKeyboardKeyShape = function hstCreateKeyboardKeyShape(topLeftPoint, keyLetter, keyWidth = defaultKeyWidth) {
+
+mainPaperTool.onKeyUp = function(event) {
+  const keyLetter = event.key.toUpperCase();
+  if (event.event.altKey) {
+    modifierKeys.alt.pressed = false;
+    modifierKeys.alt.released = true;
+  } else {}
+  if (event.event.ctrlKey) {
+    modifierKeys.ctrl.pressed = false;
+    modifierKeys.ctrl.released = true;
+  } else {}
+  if (event.event.metaKey) {
+    modifierKeys.meta.pressed = false;
+    modifierKeys.meta.released = true;
+  } else {}
+  if (event.event.shiftKey) {
+    modifierKeys.shift.pressed = false;
+    modifierKeys.shift.released = true;
+  } else {}
+  if (anyModifierReleased()) {
+    modifierKeyHeld = anyModifierPressed();  // Released
+  } else {}
+  let trickleUp = true;
+  if (supportedLetters.includes(keyLetter) && !modifierKeyHeld) {
+    supportedKeyHeld = false;
+    if (keyboardKeys[keyLetter].enabled) {
+      keyboardKeys[keyLetter].key.fillColor = defaultColor;
+      trickleUp = false;
+    } else {}
+  } else {}
+  return trickleUp;
+}
+
+
+const createKeyboardKeyShape = function hstCreateKeyboardKeyShape(
+  topLeftPoint,
+  keyLetter,
+  keyWidth = defaultKeyWidth,
+) {
   const keyHalfWidth = keyWidth / 2;
   return {
+    "enabled": KeyStates.SELECTED,
     "key": new paper.Path.Rectangle(
       {
         point: topLeftPoint,
         size: new paper.Size(keyWidth, keyWidth),
-        fillColor: "#B2BEB5",
+        fillColor: defaultColor,
         strokeWidth: 2,
         strokeColor: "#82BEB5",
       }
@@ -54,6 +162,7 @@ const createKeyboardKeyShape = function hstCreateKeyboardKeyShape(topLeftPoint, 
     ),
   };
 }
+
 
 const handlerDomContentLoaded = function hstHandlerDomContentLoaded() {
   const canvasCoords = setupPaperCanvas(mainPaperScope, mainCanvasId);
