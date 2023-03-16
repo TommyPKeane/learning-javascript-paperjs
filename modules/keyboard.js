@@ -8,8 +8,8 @@ export const KeyboardKey = class hstKeyboardKey {
   constructor(name, enabled = false, keyDown = null, keyUp = null) {
     this.name = name;
     this.enabled = enabled;
-    this.keyDown ?= keyDown;
-    this.keyUp ?= keyUp;
+    this.keyDown ??= keyDown;
+    this.keyUp ??= keyUp;
     this.isHeld = false;
     this.wasPressed = false;
     this.wasReleased = false;
@@ -132,7 +132,7 @@ export const InteractiveKeyboard = class hstInteractiveKeyboard {
     supportedKeys = [],
   ) {
     this.supportedKeys = supportedKeys;
-    for (key of this.supportedKeys) {
+    for (const key of this.supportedKeys) {
       this.keyboardKeys[key.name].enabled = true;
       this.keyboardKeys[key.name].keyUp = key.keyUp;
       this.keyboardKeys[key.name].keyDown = key.keyDown;
@@ -142,27 +142,31 @@ export const InteractiveKeyboard = class hstInteractiveKeyboard {
 
   handleKeyDown(event) {
     let trickleUp = true;
-    for (key of this.supportedKeys) {
-      this.keyboardKeys[key.name].keyDown(event);
+    for (const key of this.supportedKeys) {
+      if (event.key === key.name) {
+        this.keyboardKeys[event.key].keyDown(event);
+      } else {}
     }
     return trickleUp;
   }
 
   handleKeyUp(event) {
     let trickleUp = true;
-    for (key of this.supportedKeys) {
-      this.keyboardKeys[key.name].keyUp(event);
+    for (const key of this.supportedKeys) {
+      if (event.key === key.name) {
+        this.keyboardKeys[event.key].keyUp(event);
+      } else {}
     }
     return trickleUp;
   }
 
   handlePaperKeyDown(event) {
-    let trickleUp = handleKeyDown(event.event);
+    let trickleUp = this.handleKeyDown(event.event);
     return trickleUp;
   }
 
   handlePaperKeyUp(event) {
-    let trickleUp = handleKeyUp(event.event);
+    let trickleUp = this.handleKeyUp(event.event);
     return trickleUp;
   }
 }
